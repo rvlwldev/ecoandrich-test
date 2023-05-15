@@ -9,11 +9,11 @@ import java.time.LocalDate;
 @Data
 @Builder
 public class EmployeeResponse {
-    String firstName;
-    String lastName;
-    String email;
-    String phoneNumber;
-    LocalDate hireDate;
+    private String firstName;
+    private String lastName;
+    private String email;
+    private String phoneNumber;
+    private LocalDate hireDate;
 
     public static EmployeeResponse toResponse(Employee employee) {
         return EmployeeResponse.builder()

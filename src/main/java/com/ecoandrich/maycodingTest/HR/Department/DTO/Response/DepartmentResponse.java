@@ -9,9 +9,9 @@ import lombok.Data;
 @Builder
 public class DepartmentResponse {
 
-    String departmentName;
-    EmployeeResponse manager;
-    LocationResponse location;
+    private String departmentName;
+    private EmployeeResponse manager;
+    private LocationResponse location;
 
     public static DepartmentResponse toResponse(Department department) {
         EmployeeResponse manager = EmployeeResponse.toResponse(department.getManager());
