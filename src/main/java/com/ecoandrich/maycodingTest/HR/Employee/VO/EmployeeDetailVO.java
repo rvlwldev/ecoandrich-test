@@ -14,6 +14,7 @@ import javax.persistence.Table;
 public class EmployeeDetailVO {
     @Id
     private long employee_id;
+
     private String job_id;
     private Long manager_id;
     private long department_id;
@@ -21,7 +22,7 @@ public class EmployeeDetailVO {
     private String country_id;
     private String first_name;
     private String last_name;
-    private long salary;
+    private double salary;
     private Double commission_pct;
     private String department_name;
     private String job_title;
