@@ -1,4 +1,4 @@
-package com.ecoandrich.maycodingTest.HR.Job.Entity.ID;
+package com.ecoandrich.maycodingTest.HR.Employee.SubEntity.ID;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

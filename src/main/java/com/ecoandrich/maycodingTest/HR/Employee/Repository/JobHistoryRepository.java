@@ -1,7 +1,7 @@
-package com.ecoandrich.maycodingTest.HR.Job.Repository;
+package com.ecoandrich.maycodingTest.HR.Employee.Repository;
 
-import com.ecoandrich.maycodingTest.HR.Job.Entity.ID.HistoryID;
-import com.ecoandrich.maycodingTest.HR.Job.Entity.JobHistory;
+import com.ecoandrich.maycodingTest.HR.Employee.SubEntity.ID.HistoryID;
+import com.ecoandrich.maycodingTest.HR.Employee.SubEntity.JobHistory;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

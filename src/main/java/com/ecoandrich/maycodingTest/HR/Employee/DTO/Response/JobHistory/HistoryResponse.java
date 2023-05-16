@@ -1,7 +1,7 @@
-package com.ecoandrich.maycodingTest.HR.Job.DTO.Response;
+package com.ecoandrich.maycodingTest.HR.Employee.DTO.Response.JobHistory;
 
 import com.ecoandrich.maycodingTest.HR.Department.DTO.Response.Department.DepartmentWithManagerAndLocationResponse;
-import com.ecoandrich.maycodingTest.HR.Job.Entity.JobHistory;
+import com.ecoandrich.maycodingTest.HR.Employee.SubEntity.JobHistory;
 import lombok.Builder;
 import lombok.Data;
 
@@ -17,7 +17,8 @@ public class HistoryResponse {
 
     public static HistoryResponse toResponse(JobHistory history) {
         JobResponse job = JobResponse.toResponse(history.getJob());
-        DepartmentWithManagerAndLocationResponse department = DepartmentWithManagerAndLocationResponse.toResponse(history.getDepartment());
+        DepartmentWithManagerAndLocationResponse department = DepartmentWithManagerAndLocationResponse
+                .toResponse(history.getDepartment());
 
         return HistoryResponse.builder()
                 .startDate(history.getStart_date())

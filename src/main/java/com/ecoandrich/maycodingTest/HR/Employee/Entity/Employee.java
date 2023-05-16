@@ -1,7 +1,7 @@
 package com.ecoandrich.maycodingTest.HR.Employee.Entity;
 
 import com.ecoandrich.maycodingTest.HR.Department.Entity.Department;
-import com.ecoandrich.maycodingTest.HR.Job.Entity.Job;
+import com.ecoandrich.maycodingTest.HR.Employee.SubEntity.Job;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Getter;

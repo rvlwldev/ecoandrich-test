@@ -1,6 +1,7 @@
 package com.ecoandrich.maycodingTest.HR.Employee;
 
 import com.ecoandrich.maycodingTest.HR.Employee.DTO.Response.EmployeeDetailResponse;
+import com.ecoandrich.maycodingTest.HR.Employee.DTO.Response.JobHistory.JobHistoryResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +21,11 @@ public class EmployeeController {
     @GetMapping("/details/{id}")
     public ResponseEntity<EmployeeDetailResponse> getEmployeeInformation(@PathVariable("id") long id) {
         return ResponseEntity.ok(service.getEmployeeDetail(id));
+    }
+
+    @GetMapping("/histories/{id}")
+    public ResponseEntity<JobHistoryResponse> getEmployeeHistory(@PathVariable("id") long id) {
+        return ResponseEntity.ok(service.getHistory(id));
     }
 
 }

@@ -1,4 +1,4 @@
-package com.ecoandrich.maycodingTest.HR.Job.Entity;
+package com.ecoandrich.maycodingTest.HR.Employee.SubEntity;
 
 import com.ecoandrich.maycodingTest.HR.Department.Entity.Department;
 import com.ecoandrich.maycodingTest.HR.Employee.Entity.Employee;

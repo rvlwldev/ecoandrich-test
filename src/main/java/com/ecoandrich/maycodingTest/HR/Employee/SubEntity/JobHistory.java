@@ -1,8 +1,8 @@
-package com.ecoandrich.maycodingTest.HR.Job.Entity;
+package com.ecoandrich.maycodingTest.HR.Employee.SubEntity;
 
 import com.ecoandrich.maycodingTest.HR.Department.Entity.Department;
 import com.ecoandrich.maycodingTest.HR.Employee.Entity.Employee;
-import com.ecoandrich.maycodingTest.HR.Job.Entity.ID.HistoryID;
+import com.ecoandrich.maycodingTest.HR.Employee.SubEntity.ID.HistoryID;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 

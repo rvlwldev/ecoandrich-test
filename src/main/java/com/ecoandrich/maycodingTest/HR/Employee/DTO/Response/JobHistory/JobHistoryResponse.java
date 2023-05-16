@@ -1,8 +1,8 @@
-package com.ecoandrich.maycodingTest.HR.Job.DTO.Response;
+package com.ecoandrich.maycodingTest.HR.Employee.DTO.Response.JobHistory;
 
 import com.ecoandrich.maycodingTest.HR.Employee.DTO.Response.EmployeeResponse;
 import com.ecoandrich.maycodingTest.HR.Employee.Entity.Employee;
-import com.ecoandrich.maycodingTest.HR.Job.Entity.JobHistory;
+import com.ecoandrich.maycodingTest.HR.Employee.SubEntity.JobHistory;
 import lombok.Builder;
 import lombok.Data;
 
