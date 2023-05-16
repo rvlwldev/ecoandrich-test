@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Optional;
 
 @Entity
 @Table(name = "departments")
@@ -29,4 +30,12 @@ public class Department {
     @ManyToOne
     @JoinColumn(name = "location_id")
     private Location location;
+
+    public Optional<Employee> getManager() {
+        return Optional.ofNullable(this.manager);
+    }
+
+    public Optional<Location> getLocation() {
+        return Optional.ofNullable(this.location);
+    }
 }

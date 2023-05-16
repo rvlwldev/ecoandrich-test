@@ -15,13 +15,16 @@ public class DepartmentWithManagerAndLocationResponse {
     private LocationResponse location;
 
     public static DepartmentWithManagerAndLocationResponse toResponse(Department department) {
-        EmployeeResponse manager = EmployeeResponse.toResponse(department.getManager());
-        LocationResponse location = LocationResponse.toResponse(department.getLocation());
+        DepartmentWithManagerAndLocationResponseBuilder builder = builder();
 
-        return DepartmentWithManagerAndLocationResponse.builder()
+        department.getManager()
+                .ifPresent(manager -> builder.manager(EmployeeResponse.toResponse(manager)));
+
+        department.getLocation()
+                .ifPresent(location -> builder.location(LocationResponse.toResponse(location)));
+
+        return builder
                 .departmentName(department.getDepartment_name())
-                .manager(manager)
-                .location(location)
                 .build();
     }
 
