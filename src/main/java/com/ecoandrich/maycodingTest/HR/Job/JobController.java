@@ -17,7 +17,7 @@ public class JobController {
         this.service = service;
     }
 
-    @GetMapping("history/{id}")
+    @GetMapping("histories/{id}")
     public ResponseEntity<JobHistoryResponse> getHistory(@PathVariable("id") long id) {
         return ResponseEntity.ok(service.getHistory(id));
     }
