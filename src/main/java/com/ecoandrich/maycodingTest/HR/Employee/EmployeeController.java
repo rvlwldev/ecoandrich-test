@@ -1,12 +1,10 @@
 package com.ecoandrich.maycodingTest.HR.Employee;
 
+import com.ecoandrich.maycodingTest.HR.Employee.DTO.Request.EmployeeRequest;
 import com.ecoandrich.maycodingTest.HR.Employee.DTO.Response.EmployeeDetailResponse;
 import com.ecoandrich.maycodingTest.HR.Employee.DTO.Response.JobHistory.JobHistoryResponse;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("hr/employees")
@@ -16,6 +14,12 @@ public class EmployeeController {
 
     EmployeeController(EmployeeService service) {
         this.service = service;
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<EmployeeDetailResponse> updateEmployeeInformation(@PathVariable("id") long id,
+                                                                            @RequestBody EmployeeRequest request) {
+        return ResponseEntity.accepted().body(service.updateEmployee(id, request));
     }
 
     @GetMapping("/details/{id}")

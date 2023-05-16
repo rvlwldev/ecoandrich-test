@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
@@ -15,6 +16,7 @@ import java.time.LocalDate;
 @Table(name = "employees")
 @DynamicUpdate
 @Getter
+@Setter
 @NoArgsConstructor
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
 public class Employee {
@@ -53,5 +55,18 @@ public class Employee {
 
     private void setSalary(double salary) {
         this.salary += salary;
+    }
+
+
+    public void setSalary(Double salary) {
+        this.salary = salary;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+
+    public void setJob(Job job) {
+        this.job = job;
     }
 }
