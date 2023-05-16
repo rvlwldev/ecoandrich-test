@@ -30,9 +30,10 @@ public class JobService {
     @Transactional
     public JobHistoryResponse getHistory(long id) {
         Optional<Employee> employee = employeeRepo.findById(id);
-        List<JobHistory> history = historyRepo.findAllByEmployeeId(id);
-
         if(employee.isEmpty()) throw new IllegalArgumentException();
+
+        List<JobHistory> history = historyRepo.findAllByEmployeeId(id);
+        if(history.isEmpty()) throw new IllegalArgumentException();
 
         return JobHistoryResponse.toResponse(employee.get(), history);
     }
