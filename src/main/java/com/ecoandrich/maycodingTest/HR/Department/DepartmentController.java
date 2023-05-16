@@ -23,7 +23,7 @@ public class DepartmentController {
         return ResponseEntity.ok(service.getDepartment(id));
     }
 
-    @GetMapping("/location/{id}")
+    @GetMapping("/locations/{id}")
     public ResponseEntity<LocationWithDepartmentNamesResponse> getLocationAndDepartmentNames(@PathVariable("id") long id) {
         return ResponseEntity.ok(service.getLocationWithDepartmentNames(id));
     }
