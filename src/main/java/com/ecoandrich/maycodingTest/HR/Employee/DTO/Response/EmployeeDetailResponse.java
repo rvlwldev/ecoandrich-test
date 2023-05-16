@@ -1,6 +1,6 @@
 package com.ecoandrich.maycodingTest.HR.Employee.DTO.Response;
 
-import com.ecoandrich.maycodingTest.HR.Department.DTO.Response.DepartmentResponse;
+import com.ecoandrich.maycodingTest.HR.Department.DTO.Response.DepartmentWithManagerAndLocationResponse;
 import com.ecoandrich.maycodingTest.HR.Employee.Entity.Employee;
 import lombok.Builder;
 import lombok.Data;
@@ -16,11 +16,11 @@ public class EmployeeDetailResponse {
     private double salary;
     private Double commissionPct;
 
-    DepartmentResponse department;
+    DepartmentWithManagerAndLocationResponse department;
 
     public static EmployeeDetailResponse toResponse(Employee employee) {
 
-        DepartmentResponse department = DepartmentResponse.toResponse(employee.getDepartment());
+        DepartmentWithManagerAndLocationResponse department = DepartmentWithManagerAndLocationResponse.toResponse(employee.getDepartment());
 
         return EmployeeDetailResponse.builder()
                 .firstName(employee.getFirst_name())

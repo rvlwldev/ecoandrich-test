@@ -7,17 +7,17 @@ import lombok.Data;
 
 @Data
 @Builder
-public class DepartmentResponse {
+public class DepartmentWithManagerAndLocationResponse {
 
     private String departmentName;
     private EmployeeResponse manager;
     private LocationResponse location;
 
-    public static DepartmentResponse toResponse(Department department) {
+    public static DepartmentWithManagerAndLocationResponse toResponse(Department department) {
         EmployeeResponse manager = EmployeeResponse.toResponse(department.getManager());
         LocationResponse location = LocationResponse.toResponse(department.getLocation());
 
-        return DepartmentResponse.builder()
+        return DepartmentWithManagerAndLocationResponse.builder()
                 .departmentName(department.getDepartment_name())
                 .manager(manager)
                 .location(location)

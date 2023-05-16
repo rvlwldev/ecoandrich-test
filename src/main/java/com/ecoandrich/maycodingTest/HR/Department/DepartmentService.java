@@ -1,6 +1,6 @@
 package com.ecoandrich.maycodingTest.HR.Department;
 
-import com.ecoandrich.maycodingTest.HR.Department.DTO.Response.DepartmentResponse;
+import com.ecoandrich.maycodingTest.HR.Department.DTO.Response.DepartmentWithManagerAndLocationResponse;
 import com.ecoandrich.maycodingTest.HR.Department.Entity.Department;
 import com.ecoandrich.maycodingTest.HR.Department.Repository.DepartmentRepository;
 import org.springframework.stereotype.Service;
@@ -16,12 +16,12 @@ public class DepartmentService {
         this.repo = repo;
     }
 
-    public DepartmentResponse getDepartment(long id) {
+    public DepartmentWithManagerAndLocationResponse getDepartment(long id) {
         Optional<Department> department = repo.findById(id);
 
         if (department.isEmpty()) throw new IllegalArgumentException();
 
-        return DepartmentResponse.toResponse(department.get());
+        return DepartmentWithManagerAndLocationResponse.toResponse(department.get());
     }
 
 }

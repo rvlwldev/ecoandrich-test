@@ -1,6 +1,6 @@
 package com.ecoandrich.maycodingTest.HR.Department;
 
-import com.ecoandrich.maycodingTest.HR.Department.DTO.Response.DepartmentResponse;
+import com.ecoandrich.maycodingTest.HR.Department.DTO.Response.DepartmentWithManagerAndLocationResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,7 +18,7 @@ public class DepartmentController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<DepartmentResponse> getDepartment(@PathVariable("id") long id) {
+    public ResponseEntity<DepartmentWithManagerAndLocationResponse> getDepartment(@PathVariable("id") long id) {
         return ResponseEntity.ok(service.getDepartment(id));
     }
 
