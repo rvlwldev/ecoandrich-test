@@ -1,6 +1,6 @@
 package com.ecoandrich.maycodingTest.HR.Employee.DTO.Response;
 
-import com.ecoandrich.maycodingTest.HR.Department.DTO.Response.DepartmentWithManagerAndLocationResponse;
+import com.ecoandrich.maycodingTest.HR.Department.DTO.Response.Department.DepartmentWithManagerAndLocationResponse;
 import com.ecoandrich.maycodingTest.HR.Employee.Entity.Employee;
 import lombok.Builder;
 import lombok.Data;

@@ -1,7 +1,7 @@
 package com.ecoandrich.maycodingTest.HR.Department;
 
-import com.ecoandrich.maycodingTest.HR.Department.DTO.Response.DepartmentWithManagerAndLocationResponse;
-import com.ecoandrich.maycodingTest.HR.Department.DTO.Response.LocationWithDepartmentNamesResponse;
+import com.ecoandrich.maycodingTest.HR.Department.DTO.Response.Department.DepartmentWithManagerAndLocationResponse;
+import com.ecoandrich.maycodingTest.HR.Department.DTO.Response.Location.LocationWithDepartmentNamesResponse;
 import com.ecoandrich.maycodingTest.HR.Department.Entity.Department;
 import com.ecoandrich.maycodingTest.HR.Department.Repository.DepartmentRepository;
 import com.ecoandrich.maycodingTest.HR.Department.Repository.LocationRepository;
@@ -33,7 +33,7 @@ public class DepartmentService {
         Optional<Location> location = locationRepo.findById(id);
 
         if(location.isEmpty()) throw new IllegalArgumentException();
-        
+
         return LocationWithDepartmentNamesResponse.toResponse(location.get());
     }
 

@@ -1,4 +1,4 @@
-package com.ecoandrich.maycodingTest.HR.Department.DTO.Response;
+package com.ecoandrich.maycodingTest.HR.Department.DTO.Response.Department;
 
 import com.ecoandrich.maycodingTest.HR.Department.Entity.Department;
 import lombok.Builder;
@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 @Data
 @Builder
 public class DepartmentNameListResponse {
-    List<String> names;
+    private List<String> names;
 
     public static DepartmentNameListResponse toResponse(List<Department> department) {
         List<String> nameList = department.stream()

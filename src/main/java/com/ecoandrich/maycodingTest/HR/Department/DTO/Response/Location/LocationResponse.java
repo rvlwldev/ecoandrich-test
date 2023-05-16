@@ -1,4 +1,4 @@
-package com.ecoandrich.maycodingTest.HR.Department.DTO.Response;
+package com.ecoandrich.maycodingTest.HR.Department.DTO.Response.Location;
 
 import com.ecoandrich.maycodingTest.HR.Department.SubEntity.Country;
 import com.ecoandrich.maycodingTest.HR.Department.SubEntity.Location;
