@@ -16,19 +16,24 @@ public class EmployeeDetailResponse {
     private double salary;
     private Double commissionPct;
 
+    private EmployeeResponse manager;
     DepartmentWithManagerAndLocationResponse department;
 
     public static EmployeeDetailResponse toResponse(Employee employee) {
+        EmployeeDetailResponseBuilder builder = EmployeeDetailResponse.builder();
 
-        DepartmentWithManagerAndLocationResponse department = DepartmentWithManagerAndLocationResponse.toResponse(employee.getDepartment());
+        employee.getDepartment()
+                .ifPresent(department -> builder.department(DepartmentWithManagerAndLocationResponse.toResponse(department)));
 
-        return EmployeeDetailResponse.builder()
+        employee.getManager()
+                .ifPresent(manager -> builder.manager(EmployeeResponse.toResponse(manager)));
+
+        return builder
                 .firstName(employee.getFirst_name())
                 .lastName(employee.getLast_name())
                 .jobTitle(employee.getJob().getJob_title())
                 .salary(employee.getSalary())
                 .commissionPct(employee.getCommission_pct())
-                .department(department)
                 .build();
     }
 

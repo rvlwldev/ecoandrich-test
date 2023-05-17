@@ -63,12 +63,13 @@ public class EmployeeService {
     }
 
     private Employee updateEmployeeRelation(Employee employee, EmployeeRequest request) {
-        if (request.getManagerId() != 0) employee.setManager_id(request.getManagerId());
+        if (request.getManagerId() != null) employee.setManager(repo.findById(request.getManagerId())
+                .orElseThrow(IllegalArgumentException::new));
 
         if (request.getJobId() != null) employee.setJob(jobRepo.findById(request.getJobId())
                 .orElseThrow(IllegalArgumentException::new));
 
-        if (request.getDepartmentId() != 0) employee.setDepartment(departmentRepo.findById(request.getDepartmentId())
+        if (request.getDepartmentId() != null) employee.setDepartment(departmentRepo.findById(request.getDepartmentId())
                 .orElseThrow(IllegalArgumentException::new));
 
         return employee;

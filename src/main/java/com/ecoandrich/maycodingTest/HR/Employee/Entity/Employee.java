@@ -11,6 +11,7 @@ import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Optional;
 
 @Entity
 @Table(name = "employees")
@@ -39,7 +40,9 @@ public class Employee {
 
     private Double commission_pct;
 
-    private Long manager_id;
+    @OneToOne
+    @JoinColumn(name = "manager_id")
+    private Employee manager;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "job_id")
@@ -57,7 +60,6 @@ public class Employee {
         this.salary += salary;
     }
 
-
     public void setSalary(Double salary) {
         this.salary = salary;
     }
@@ -69,4 +71,13 @@ public class Employee {
     public void setJob(Job job) {
         this.job = job;
     }
+
+    public Optional<Department> getDepartment() {
+        return Optional.ofNullable(this.department);
+    }
+
+    public Optional<Employee> getManager() {
+        return Optional.ofNullable(this.manager);
+    }
+
 }

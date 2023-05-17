@@ -14,6 +14,6 @@ public class EmployeeRequest {
     private String jobId;
     private Double salary;
     private Double commissionPct;
-    private long managerId;
-    private long departmentId;
+    private Long managerId;
+    private Long departmentId;
 }
