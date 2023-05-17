@@ -81,7 +81,7 @@ public class EmployeeService {
         if (request.getPhoneNumber() != null) employee.setPhone_number(request.getPhoneNumber());
         if (request.getHireDate() != null) employee.setHire_date(request.getHireDate());
         if (request.getSalary() != null) employee.setSalary(request.getSalary());
-        if (request.getCommissionPercent() != null) employee.setCommission_pct(request.getCommissionPercent());
+        if (request.getCommissionPct() != null) employee.setCommission_pct(request.getCommissionPct());
 
         return employee;
     }

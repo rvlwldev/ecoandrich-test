@@ -13,7 +13,7 @@ public class EmployeeRequest {
     private LocalDate hireDate;
     private String jobId;
     private Double salary;
-    private Double commissionPercent;
+    private Double commissionPct;
     private long managerId;
     private long departmentId;
 }
