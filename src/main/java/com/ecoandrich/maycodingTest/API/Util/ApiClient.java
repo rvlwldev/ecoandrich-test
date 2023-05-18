@@ -23,16 +23,21 @@ public class ApiClient {
             .connectTimeout(Duration.ofSeconds(5))
             .build();
 
+    public String getRequestResultByString(String url) throws ApiRequestException {
+        return getRequestResultByString(url, "");
+    }
+
     public String getRequestResultByString(String url, String authKey) throws ApiRequestException {
+        if(!authKey.isEmpty()) authKey = "?serviceKey=" + authKey;
+
         try {
-            HttpRequest request = HttpRequest.newBuilder(new URI(url + "?serviceKey=" + authKey))
+            HttpRequest request = HttpRequest.newBuilder(new URI(url + authKey))
                     .GET()
                     .header(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE)
                     .build();
 
             return client.send(request, HttpResponse.BodyHandlers.ofString())
                     .body();
-
         } catch (URISyntaxException | IOException | InterruptedException e) {
             if (e instanceof URISyntaxException || e instanceof IOException)
                 throw new ApiRequestException(NOT_PROPER_URL_REQUEST.toString());
