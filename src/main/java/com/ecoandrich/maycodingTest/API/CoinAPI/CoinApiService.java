@@ -4,11 +4,10 @@ import com.ecoandrich.maycodingTest.API.CoinAPI.DTO.Response.CryptoDetailRespons
 import com.ecoandrich.maycodingTest.API.CoinAPI.DTO.Response.CryptoInfoResponse;
 import com.ecoandrich.maycodingTest.API.PublicAPI._Common.Exception.ApiRequestException;
 import com.ecoandrich.maycodingTest.API.Util.ApiClient;
+import com.ecoandrich.maycodingTest.API.Util.Exception.JsonToClassException;
 import com.ecoandrich.maycodingTest.API.Util.JsonHelper;
-import org.json.simple.parser.ParseException;
 import org.springframework.stereotype.Service;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 import static com.ecoandrich.maycodingTest.API.CoinAPI._Common.Constant.UpBitTickerApiInformation.ALL_CRYPTO_INFO_URL;
@@ -25,17 +24,16 @@ public class CoinApiService {
         this.jsonHelper = jsonHelper;
     }
 
-    public List<CryptoInfoResponse> getAllCryptoInfo() throws ApiRequestException, ParseException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+    public List<CryptoInfoResponse> getAllCryptoInfo() throws ApiRequestException, JsonToClassException {
         String apiResponse = client.getRequestResultByString(ALL_CRYPTO_INFO_URL.toString());
 
         return jsonHelper.getResponseClassByApiResponseList(apiResponse, CryptoInfoResponse.class);
     }
 
-    public List<CryptoDetailResponse> getCryptoDetailInfo(String ids) throws ApiRequestException, ParseException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+    public List<CryptoDetailResponse> getCryptoDetailInfo(String ids) throws ApiRequestException, JsonToClassException {
         String apiResponse = client.getRequestResultByString(CRYPTO_DETAIL_INFO_URL + ids);
 
         return jsonHelper.getResponseClassByApiResponseList(apiResponse, CryptoDetailResponse.class);
     }
-
 
 }

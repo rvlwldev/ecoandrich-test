@@ -3,6 +3,7 @@ package com.ecoandrich.maycodingTest.API.CoinAPI;
 import com.ecoandrich.maycodingTest.API.CoinAPI.DTO.Response.CryptoDetailResponse;
 import com.ecoandrich.maycodingTest.API.CoinAPI.DTO.Response.CryptoInfoResponse;
 import com.ecoandrich.maycodingTest.API.PublicAPI._Common.Exception.ApiRequestException;
+import com.ecoandrich.maycodingTest.API.Util.Exception.JsonToClassException;
 import org.json.simple.parser.ParseException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,12 +25,12 @@ public class CoinApiController {
     }
 
     @GetMapping
-    public ResponseEntity<List<CryptoInfoResponse>> getAllCryptos() throws ApiRequestException, ParseException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+    public ResponseEntity<List<CryptoInfoResponse>> getAllCryptos() throws ApiRequestException, JsonToClassException {
         return ResponseEntity.ok(service.getAllCryptoInfo());
     }
 
     @GetMapping("/{ids}")
-    public ResponseEntity<List<CryptoDetailResponse>> getCryptoById(@PathVariable("ids") String ids) throws ApiRequestException, ParseException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+    public ResponseEntity<List<CryptoDetailResponse>> getCryptoById(@PathVariable("ids") String ids) throws ApiRequestException, JsonToClassException {
         return ResponseEntity.ok(service.getCryptoDetailInfo(ids));
     }
 }

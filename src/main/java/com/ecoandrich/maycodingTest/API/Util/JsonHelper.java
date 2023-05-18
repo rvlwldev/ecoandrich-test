@@ -1,18 +1,20 @@
 package com.ecoandrich.maycodingTest.API.Util;
 
+import com.ecoandrich.maycodingTest.API.Util.Exception.JsonToClassException;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.stereotype.Component;
 
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import static com.ecoandrich.maycodingTest.API.Util.Exception.Message.JsonHelperErrorMessage.INVALID_RESPONSE_DATA_TYPE;
 
 @Component
 public class JsonHelper {
@@ -27,31 +29,51 @@ public class JsonHelper {
         return (JSONArray) parser.parse(jsonData);
     }
 
-    public <T> List<T> getResponseClassByApiResponseList(String jsonData, Class<T> clazz) throws ParseException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+    public <T> List<T> getResponseClassByApiResponseList(String jsonData, Class<T> clazz) throws JsonToClassException {
         List<T> responseList = new ArrayList<>();
+        JSONArray jsonArray;
 
-        JSONArray jsonArray = toJSONArray(jsonData);
+        try {
+            jsonArray = toJSONArray(jsonData);
+        } catch (ParseException e) {
+            throw new JsonToClassException();
+        }
 
-        for (Object json : jsonArray) responseList.add(getResponseClassByApiResponse(json.toString(), clazz));
+        try {
+            for (Object json : jsonArray) responseList.add(getResponseClassByApiResponse(json.toString(), clazz));
+        } catch (Exception e) {
+            throw new JsonToClassException(INVALID_RESPONSE_DATA_TYPE.toString());
+        }
 
         return responseList;
     }
 
-    public <T> T getResponseClassByApiResponse(String jsonData, Class<T> clazz) throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException, ParseException {
-        JSONObject json = toJSONObject(jsonData);
+    public <T> T getResponseClassByApiResponse(String jsonData, Class<T> clazz) throws JsonToClassException {
+        JSONObject json;
+        T result;
+
+        try {
+            json = toJSONObject(jsonData);
+        } catch (ParseException e) {
+            throw new JsonToClassException();
+        }
 
         HashMap<String, Object> jsonMap = new HashMap<>() {{
             for (Object key : json.keySet()) put(toCamelCase(key.toString()), json.get(key));
         }};
 
-        T result = clazz.getDeclaredConstructor().newInstance();
-        List<Method> setterMethodList = Stream.of(clazz.getMethods())
-                .filter(method -> method.getName().startsWith("set"))
-                .collect(Collectors.toList());
+        try {
+            result = clazz.getDeclaredConstructor().newInstance();
+            List<Method> setterMethodList = Stream.of(clazz.getMethods())
+                    .filter(method -> method.getName().startsWith("set"))
+                    .collect(Collectors.toList());
 
-        for (Method setter : setterMethodList) {
-            String jsonKey = getFieldNameBySetterMethod(setter.getName());
-            setter.invoke(result, convertType(jsonMap.get(jsonKey), setter.getParameterTypes()[0]));
+            for (Method setter : setterMethodList) {
+                String jsonKey = getFieldNameBySetterMethod(setter.getName());
+                setter.invoke(result, convertType(jsonMap.get(jsonKey), setter.getParameterTypes()[0]));
+            }
+        } catch (Exception e) {
+            throw new JsonToClassException(INVALID_RESPONSE_DATA_TYPE.toString());
         }
 
         return result;
