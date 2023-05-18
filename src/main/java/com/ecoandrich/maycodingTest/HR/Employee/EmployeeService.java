@@ -11,6 +11,9 @@ import com.ecoandrich.maycodingTest.HR.Employee.Repository.JobHistoryRepository;
 import com.ecoandrich.maycodingTest.HR.Employee.Repository.JobRepository;
 import com.ecoandrich.maycodingTest.HR.Employee.SubEntity.JobHistory;
 import com.ecoandrich.maycodingTest.HR.Employee.VO.EmployeeDetailVO;
+import com.ecoandrich.maycodingTest.HR._Common.ExceptionHandler.Exception.EmployeeNotFoundException;
+import com.ecoandrich.maycodingTest.HR._Common.ExceptionHandler.Exception.JobHistoryNotFoundException;
+import com.ecoandrich.maycodingTest.HR._Common.ExceptionHandler.Exception.JobNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -42,11 +45,8 @@ public class EmployeeService {
     }
 
     public EmployeeDetailResponse getEmployeeDetail(long id) {
-        Optional<Employee> optionalEmployee = repo.findById(id);
-
-        if (optionalEmployee.isEmpty()) throw new IllegalArgumentException();
-
-        Employee employee = optionalEmployee.get();
+        Employee employee = repo.findById(id)
+                .orElseThrow(EmployeeNotFoundException::new);
 
         return EmployeeDetailResponse.toResponse(employee);
     }
@@ -54,7 +54,7 @@ public class EmployeeService {
     @Transactional
     public EmployeeDetailResponse updateEmployee(long id, EmployeeRequest request) {
         Employee employee = repo.findById(id)
-                .orElseThrow(IllegalArgumentException::new);
+                .orElseThrow(EmployeeNotFoundException::new);
 
         employee = updateEmployeeRelation(employee, request);
         employee = updateEmployeeField(employee, request);
@@ -63,12 +63,13 @@ public class EmployeeService {
     }
 
     private Employee updateEmployeeRelation(Employee employee, EmployeeRequest request) {
-        if (request.getManagerId() != 0) employee.setManager_id(request.getManagerId());
+        if (request.getManagerId() != null) employee.setManager(repo.findById(request.getManagerId())
+                .orElseThrow(() -> new EmployeeNotFoundException(request.getManagerId())));
 
         if (request.getJobId() != null) employee.setJob(jobRepo.findById(request.getJobId())
-                .orElseThrow(IllegalArgumentException::new));
+                .orElseThrow(() -> new JobNotFoundException(request.getJobId())));
 
-        if (request.getDepartmentId() != 0) employee.setDepartment(departmentRepo.findById(request.getDepartmentId())
+        if (request.getDepartmentId() != null) employee.setDepartment(departmentRepo.findById(request.getDepartmentId())
                 .orElseThrow(IllegalArgumentException::new));
 
         return employee;
@@ -88,13 +89,13 @@ public class EmployeeService {
 
     @Transactional
     public JobHistoryResponse getHistory(long id) {
-        Optional<Employee> employee = repo.findById(id);
-        if (employee.isEmpty()) throw new IllegalArgumentException();
+        Employee employee = repo.findById(id)
+                .orElseThrow(EmployeeNotFoundException::new);
 
         List<JobHistory> history = historyRepo.findAllByEmployeeId(id);
-        if (history.isEmpty()) throw new IllegalArgumentException();
+        if (history.isEmpty()) throw new JobHistoryNotFoundException(id);
 
-        return JobHistoryResponse.toResponse(employee.get(), history);
+        return JobHistoryResponse.toResponse(employee, history);
     }
 
     public Optional<EmployeeDetailVO> getEmployeeVO(long id) {
