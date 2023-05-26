@@ -57,3 +57,5 @@ api : API 조회 및 반환 + 예외처리
   (해당 클래스는 자바 Reflection과 json-simple을 사용했습니다.)
   - DTO에 존재하는 필드(카멜케이스로 통일)만 반환됩니다.
 
+---
+API 명세서 (Swagger) : http://49.50.160.93:8080/swagger-ui/index.html
